@@ -26,10 +26,14 @@ const editing = ref(false);
         </svg>
         <div class="flex-1">
             <div class="flex justify-between items-center">
-                <div>
-                    <span class="text-gray-800">{{ chirp.user.name }}</span>
-                    <small class="ml-2 text-sm text-gray-600">{{ dayjs(chirp.created_at).fromNow() }}</small>
-                    <small v-if="chirp.created_at !== chirp.updated_at" class="text-sm text-gray-600"> &middot; edited</small>
+                <div class="flex items-baseline">
+                    <strong class="text-gray-800">{{ chirp.user.name }}</strong>
+                    <div class="text-sm text-gray-400">
+                        <span class="ml-2">@{{ chirp.user.username }}</span>
+                        <span class="mx-2">·</span>
+                        <span>{{ dayjs(chirp.created_at).fromNow() }}</span>
+                        <span v-if="chirp.created_at !== chirp.updated_at" class="text-sm text-gray-600"> &middot; edited</span>
+                    </div>
                 </div>
                 <Dropdown v-if="chirp.user.id === $page.props.auth.user.id">
                     <template #trigger>
@@ -57,7 +61,8 @@ const editing = ref(false);
                     <button class="mt-4" @click="editing = false; form.reset(); form.clearErrors()">Cancel</button>
                 </div>
             </form>
-            <p v-else class="mt-4 text-lg text-gray-900">{{ chirp.message }}</p>
+            <p v-else class="mt-4 text-lg text-gray-900">
+                {{ chirp.message }}</p>
         </div>
     </div>
 </template>

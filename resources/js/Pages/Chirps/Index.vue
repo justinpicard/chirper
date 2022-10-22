@@ -10,6 +10,11 @@ defineProps(['chirps']);
 const form = useForm({
     message: '',
 });
+function destroy(id) {
+    if (confirm("Are you sure you want to Delete")) {
+        form.delete(route('chirps.destroy', id));
+    }
+}
 </script>
 
 <template>
