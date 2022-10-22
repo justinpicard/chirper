@@ -10,11 +10,6 @@ defineProps(['chirps']);
 const form = useForm({
     message: '',
 });
-function destroy(id) {
-    if (confirm("Are you sure you want to Delete")) {
-        form.delete(route('chirps.destroy', id));
-    }
-}
 </script>
 
 <template>
@@ -22,7 +17,7 @@ function destroy(id) {
 
     <AuthenticatedLayout>
         <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-            <form @submit.prevent="form.post(route('chirps.store'), { onSuccess: () => form.reset() })">
+            <form @submit.prevent="form.post(route('chirps.store'), { onSuccess: () => form.reset() })" class="flex flex-col items-end">
                 <textarea
                     v-model="form.message"
                     placeholder="What's on your mind?"
